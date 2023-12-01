@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Créer un compte</title>
+</head>
+<body>
+<h3>Créez un compte</h3>
+<form action="creerCompte.php"  method="post">
+    Identifiant <br/>
+    <input 	name="email" type="text" placeholder="adresse@mail.com" value="<?php echo $email;?>">
+    <br/>
+    Mot de passe <br/>
+    <input  name="mdp" type="text" value= "<?php echo $mdp;?>">
+    <br/>
+    <input type= "submit" value="soumettre">
+</form>
+
+<div id ="msg"> <?php echo $msg;?> </div>
+</body>
+</html>

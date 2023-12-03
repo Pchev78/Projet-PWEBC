@@ -3,25 +3,29 @@
 
 <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="./style/identification.css">
     <title>Se connecter à votre compte</title>
 </head>
 
 <body>
-<h3> Formulaire d'authentification </h3>
+    <div class="container">
+        <h3> Formulaire d'authentification </h3>
 
-<form action="connexion.php" method="post">
-    Identifiant <br/>
-    <input 	name="email" type="text" placeholder="adresse@mail.com" value="<?php echo $email;?>">
-    <br/>
-    Mot de passe <br/>
-    <input  name="mdp" type="text" value= "<?php echo $mdp;?>">
-    <br/>
-    <input type= "submit" value="soumettre">
-    <div>
-        Vous n'avez pas encore de compte ? <a href="creerCompte.php">Créez-en un !</a>
+        <form action="connexion.php" method="post">
+            Identifiant <br />
+            <input name="email" type="text" placeholder="adresse@mail.com" value="<?php echo $email; ?>">
+            <br />
+            Mot de passe <br />
+            <input name="mdp" type="password" value="<?php echo $mdp; ?>">
+            <br />
+            <input type="submit" value="Soumettre">
+            <div>
+                Vous n'avez pas encore de compte ? <a href="creerCompte.php">Créez-en un !</a>
+            </div>
+        </form>
+
+        <div id="m"> <?php echo $msg; ?> </div>
     </div>
-</form>
-
-<div id ="m"> <?php echo $msg; ?> </div>
 </body>
+
 </html>

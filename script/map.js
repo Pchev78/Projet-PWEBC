@@ -117,4 +117,24 @@ $(document).ready(function () {
 
     // set maxBounds
     map.setMaxBounds(map.getBounds());
+
+    /*@TODO A implementer depuis ce site https://tomickigrzegorz.github.io/leaflet-examples/# :
+        * 8/45 - Control different groups of markers / Multi layer search
+        * 21 - Geocoding adresses search engine outside the map
+        * 22 - Center the map when clicking marker
+        * 27 - Fullscreen
+        * 30 - Minimap plugin ?
+        * 31 - Awesome markers plugin - en fonction du groupe défini en 8
+        * 32 - Images icons prev next
+        * 33/49 - Location / Location button
+        * 34 - Multiple layers
+        * 42 - Scale
+        * 50 - Autocomplete on map - button
+        * 51 - Tabs in popup
+        * 54 - Contextmenu
+        * 59 - Sidebar replacing popup
+        * 64 - Autocomplete with geojson
+        * 69 - Simple animation of jumping marker
+        *
+     */
 });

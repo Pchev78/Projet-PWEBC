@@ -3,6 +3,7 @@ $(document).ready(function () {
     let config = {
         minZoom: 11,
         maxZoom: 20,
+        fullscreenControl: true,
     };
     // magnification with which the map will start
     const zoom = 12;
@@ -31,7 +32,8 @@ $(document).ready(function () {
                 if (row['Type de commerce'] === type) {
                     let marker = L.marker(row.geo_point_2d.split(","), {
                         opacity: 1
-                    }).bindPopup(row['Nom du commerce'] + "<br>" + row['Adresse']);
+                    }).bindPopup(row['Nom du commerce'] + "<br>" + row['Adresse'])
+                        .on("click", clickZoom);
                     typeMarkers.addLayer(marker);
                 }
             }
@@ -118,14 +120,17 @@ $(document).ready(function () {
     // set maxBounds
     map.setMaxBounds(map.getBounds());
 
+    // 22 - Center map
+    function clickZoom(e) {
+        map.setView(e.target.getLatLng(), 18);
+    }
+
+
     /*@TODO A implementer depuis ce site https://tomickigrzegorz.github.io/leaflet-examples/# :
         * 8/45 - Control different groups of markers / Multi layer search
         * 21 - Geocoding adresses search engine outside the map
-        * 22 - Center the map when clicking marker
         * 27 - Fullscreen
-        * 30 - Minimap plugin ?
         * 31 - Awesome markers plugin - en fonction du groupe défini en 8
-        * 32 - Images icons prev next
         * 33/49 - Location / Location button
         * 34 - Multiple layers
         * 42 - Scale
@@ -135,6 +140,5 @@ $(document).ready(function () {
         * 59 - Sidebar replacing popup
         * 64 - Autocomplete with geojson
         * 69 - Simple animation of jumping marker
-        *
      */
 });

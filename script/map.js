@@ -125,21 +125,24 @@ $(document).ready(function () {
         map.setView(e.target.getLatLng(), 18);
     }
 
+    // 33 - Localisation
     map
         .locate({
             // https://leafletjs.com/reference-1.7.1.html#locate-options-option
             setView: true,
-            watch: true,
-            enableHighAccuracy: false,
+            enableHighAccuracy: true,
         })
         // if location found show marker and circle
         .on("locationfound", (e) => {
             const latUser = e.latitude, lgnUser = e.longitude; // @TODO A utiliser pour la suite
-        })
-        // if error show alert
-        .on("locationerror", (e) => {
-            console.log(e);
         });
+
+    // 42 - Echelle
+    L.control
+        .scale({
+            imperial: false,
+        })
+        .addTo(map);
     /*@TODO A implementer depuis ce site https://tomickigrzegorz.github.io/leaflet-examples/# :
         * 8/45 - Control different groups of markers / Multi layer search
         * 21 - Geocoding adresses search engine outside the map

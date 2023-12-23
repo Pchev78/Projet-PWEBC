@@ -1,25 +1,39 @@
 $(document).ready(function () {
-    // config map
+
+    const zoom = 12;
+    const lat = 48.866667, lng = 2.333333;
+
+    // 33 - Plusieurs surfaces
+    const osmLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
+    const cartoDB = '<a href="http://cartodb.com/attributions">CartoDB</a>';
+    const cartoAttrib = `&copy; ${osmLink} Contributors & ${cartoDB}`;
+    const landUrl =
+        "https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}.png";
+    const landMap = L.tileLayer(landUrl, { attribution: cartoAttrib });
+    const osmUrl = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
+    const osmAttrib = `&copy; ${osmLink} Contributors`;
+    const osmMap = L.tileLayer(osmUrl, { attribution: osmAttrib });
+
+    const otmUrl = "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png";
+    const otmAttrib = "Map data: © OpenStreetMap contributors, SRTM | Map style: © OpenTopoMap (CC-BY-SA)";
+    const otmMap = L.tileLayer(otmUrl, { attribution: otmAttrib });
+
     let config = {
+        layers: [osmMap],
         minZoom: 11,
         maxZoom: 20,
         fullscreenControl: true,
     };
-    // magnification with which the map will start
-    const zoom = 12;
-    // co-ordinates
-    const lat = 48.866667;
-    const lng = 2.333333;
-
     // calling map
     const map = L.map("map", config).setView([lat, lng], zoom);
     // Used to load and display tile layers on the map
     // Most tile servers require attribution, which you can set under `Layer`
-    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution:
-            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    }).addTo(map);
-
+    var baseLayers = {
+        "Basique": osmMap,
+        "Mode sombre": landMap,
+        "Topographie": otmMap,
+    };
+    L.control.layers(baseLayers).addTo(map);
     // Read markers data from data.csv
     $.get('./data.csv', function (csvString) {
         // Use PapaParse to convert string to array of objects
@@ -41,6 +55,55 @@ $(document).ready(function () {
         }
         map.addLayer(markers);
     });
+
+
+
+    // coordinates limiting the map
+    function getBounds() {
+        const southWest = new L.LatLng(lat - 0.001, lng - 0.001);
+        const northEast = new L.LatLng(lat + 0.001, lng + 0.001);
+        return new L.LatLngBounds(southWest, northEast);
+    }
+
+    // set maxBounds
+    map.setMaxBounds(map.getBounds());
+
+    // 22 - Center map
+    function clickZoom(e) {
+        map.setView(e.target.getLatLng(), 18);
+    }
+
+    // 33 - Localisation
+    map
+        .locate({
+            // https://leafletjs.com/reference-1.7.1.html#locate-options-option
+            setView: true,
+            enableHighAccuracy: true,
+        })
+        // if location found show marker and circle
+        .on("locationfound", (e) => {
+            const latUser = e.latitude, lgnUser = e.longitude; // @TODO A utiliser pour la suite
+        });
+
+    // 42 - Echelle
+    L.control
+        .scale({
+            imperial: false,
+        })
+        .addTo(map);
+
+    /*@TODO A implementer depuis ce site https://tomickigrzegorz.github.io/leaflet-examples/# :
+        * 8/45 - Control different groups of markers / Multi layer search
+        * 21 - Geocoding adresses search engine outside the map
+        * 27 - Fullscreen
+        * 31 - Awesome markers plugin - en fonction du groupe défini en 8
+        * 33/49 - Location / Location button
+        * 50 - Autocomplete on map - button
+        * 54 - Contextmenu
+        * 59 - Sidebar replacing popup
+        * 64 - Autocomplete with geojson
+        * 69 - Simple animation of jumping marker
+     */
 
 
     /*
@@ -110,52 +173,4 @@ $(document).ready(function () {
         new L.Control.CustomButtons(null, overlayMaps, { collapsed: false }).addTo(map);
 
     */
-    // coordinates limiting the map
-    function getBounds() {
-        const southWest = new L.LatLng(lat - 0.001, lng - 0.001);
-        const northEast = new L.LatLng(lat + 0.001, lng + 0.001);
-        return new L.LatLngBounds(southWest, northEast);
-    }
-
-    // set maxBounds
-    map.setMaxBounds(map.getBounds());
-
-    // 22 - Center map
-    function clickZoom(e) {
-        map.setView(e.target.getLatLng(), 18);
-    }
-
-    // 33 - Localisation
-    map
-        .locate({
-            // https://leafletjs.com/reference-1.7.1.html#locate-options-option
-            setView: true,
-            enableHighAccuracy: true,
-        })
-        // if location found show marker and circle
-        .on("locationfound", (e) => {
-            const latUser = e.latitude, lgnUser = e.longitude; // @TODO A utiliser pour la suite
-        });
-
-    // 42 - Echelle
-    L.control
-        .scale({
-            imperial: false,
-        })
-        .addTo(map);
-    /*@TODO A implementer depuis ce site https://tomickigrzegorz.github.io/leaflet-examples/# :
-        * 8/45 - Control different groups of markers / Multi layer search
-        * 21 - Geocoding adresses search engine outside the map
-        * 27 - Fullscreen
-        * 31 - Awesome markers plugin - en fonction du groupe défini en 8
-        * 33/49 - Location / Location button
-        * 34 - Multiple layers
-        * 42 - Scale
-        * 50 - Autocomplete on map - button
-        * 51 - Tabs in popup
-        * 54 - Contextmenu
-        * 59 - Sidebar replacing popup
-        * 64 - Autocomplete with geojson
-        * 69 - Simple animation of jumping marker
-     */
 });

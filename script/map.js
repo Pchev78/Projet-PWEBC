@@ -31,36 +31,26 @@ $(document).ready(function () {
     };
 
 
-
-
     map.addLayer(baseLayers.OSM);
     L.control.layers(baseLayers).addTo(map);
 
-    //Plugin magic goes here! Note that you cannot use the same layer object again, as that will confuse the two map controls
     var miniMap = new L.Control.MiniMap(baseLayersMiniMap.OSM, { toggleDisplay: true }).addTo(map);
-
     map.on('baselayerchange', function (e) {
         miniMap.changeLayer(baseLayersMiniMap[e.name]);
     })
 
-    // Read markers data from data.csv
-    $.get('./data.csv', function (csvString) {
+    // Read markers data from csv
+    $.get('./velib.csv', function (csvString) {
         // Use PapaParse to convert string to array of objects
         var data = Papa.parse(csvString, {header: true, dynamicTyping: true}).data;
         let markers = L.markerClusterGroup();
-        let types = new Set(data.map(row => row['Type de commerce']));
-        for (let type of types) {
-            let typeMarkers = new L.FeatureGroup();
-            for (let row of data) {
-                if (row['Type de commerce'] === type) {
-                    let marker = L.marker(row.geo_point_2d.split(","), {
-                        opacity: 1
-                    }).bindPopup(row['Nom du commerce'] + "<br>" + row['Adresse'])
-                        .on("click", clickZoom);
-                    typeMarkers.addLayer(marker);
-                }
-            }
-            markers.addLayer(typeMarkers);
+        for (let elt in data) {
+            let row = data[elt];
+            console.log([row.longitude, row.latitude]);
+            let marker = L.marker([row.longitude, row.latitude], {
+                opacity: 1
+            }).bindPopup(row.name);
+            markers.addLayer(marker);
         }
         map.addLayer(markers);
     });
@@ -69,13 +59,12 @@ $(document).ready(function () {
 
     // coordinates limiting the map
     function getBounds() {
-        const southWest = new L.LatLng(lat - 0.001, lng - 0.001);
-        const northEast = new L.LatLng(lat + 0.001, lng + 0.001);
+        const southWest = new L.LatLng(48.754194, 2.133472);
+        const northEast = new L.LatLng(49.017367, 2.590224);
         return new L.LatLngBounds(southWest, northEast);
     }
 
-    // set maxBounds
-    map.setMaxBounds(map.getBounds());
+    map.setMaxBounds(getBounds());
 
     // 22 - Center map
     function clickZoom(e) {
@@ -101,7 +90,7 @@ $(document).ready(function () {
         })
         .addTo(map);
 
-    /*@TODO A implementer depuis ce site https://tomickigrzegorz.github.io/leaflet-examples/# :
+        /*@TODO A implementer depuis ce site https://tomickigrzegorz.github.io/leaflet-examples/# :
         * 8/45 - Control different groups of markers / Multi layer search
         * 21 - Geocoding adresses search engine outside the map
         * 27 - Fullscreen
@@ -109,7 +98,6 @@ $(document).ready(function () {
         * 33/49 - Location / Location button
         * 50 - Autocomplete on map - button
         * 54 - Contextmenu
-        * 59 - Sidebar replacing popup
         * 64 - Autocomplete with geojson
         * 69 - Simple animation of jumping marker
      */

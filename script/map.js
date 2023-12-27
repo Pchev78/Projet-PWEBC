@@ -2,38 +2,47 @@ $(document).ready(function () {
 
     const zoom = 12;
     const lat = 48.866667, lng = 2.333333;
-
     // 33 - Plusieurs surfaces
-    const osmLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
-    const cartoDB = '<a href="http://cartodb.com/attributions">CartoDB</a>';
-    const cartoAttrib = `&copy; ${osmLink} Contributors & ${cartoDB}`;
-    const landUrl =
-        "https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}.png";
-    const landMap = L.tileLayer(landUrl, { attribution: cartoAttrib });
-    const osmUrl = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
-    const osmAttrib = `&copy; ${osmLink} Contributors`;
-    const osmMap = L.tileLayer(osmUrl, { attribution: osmAttrib });
-
-    const otmUrl = "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png";
-    const otmAttrib = "Map data: © OpenStreetMap contributors, SRTM | Map style: © OpenTopoMap (CC-BY-SA)";
-    const otmMap = L.tileLayer(otmUrl, { attribution: otmAttrib });
-
     let config = {
-        layers: [osmMap],
         minZoom: 11,
-        maxZoom: 20,
+        maxZoom: 19,
         fullscreenControl: true,
     };
-    // calling map
     const map = L.map("map", config).setView([lat, lng], zoom);
-    // Used to load and display tile layers on the map
-    // Most tile servers require attribution, which you can set under `Layer`
+
+    var osmURL='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+    var osmAttrib='Map data &copy; OpenStreetMap contributors';
+
+    var cartoURL='http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png';
+    var cartoAttrib='Map data &copy; OpenStreetMap contributors';
+
+    const otmURL = "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png";
+    const otmAttrib = "Map data: © OpenStreetMap contributors, SRTM | Map style: © OpenTopoMap (CC-BY-SA)";
+
     var baseLayers = {
-        "Basique": osmMap,
-        "Mode sombre": landMap,
-        "Topographie": otmMap,
+        OSM:  L.tileLayer(osmURL, {minZoom: config.minZoom, maxZoom: config.maxZoom, attribution: osmAttrib}),
+        DarkMap: L.tileLayer(cartoURL, {minZoom: config.minZoom, maxZoom: config.maxZoom, attribution: cartoAttrib}),
+        Topographie: L.tileLayer(otmURL, {minZoom: config.minZoom, maxZoom: config.maxZoom, attribution: otmAttrib})
     };
+    var baseLayersMiniMap = {
+        OSM:  L.tileLayer(osmURL, {minZoom: 0, maxZoom: config.maxZoom, attribution: osmAttrib}),
+        DarkMap: L.tileLayer(cartoURL, {minZoom: 0, maxZoom: config.maxZoom, attribution: cartoAttrib}),
+        Topographie: L.tileLayer(otmURL, {minZoom: 0, maxZoom: config.maxZoom, attribution: otmAttrib})
+    };
+
+
+
+
+    map.addLayer(baseLayers.OSM);
     L.control.layers(baseLayers).addTo(map);
+
+    //Plugin magic goes here! Note that you cannot use the same layer object again, as that will confuse the two map controls
+    var miniMap = new L.Control.MiniMap(baseLayersMiniMap.OSM, { toggleDisplay: true }).addTo(map);
+
+    map.on('baselayerchange', function (e) {
+        miniMap.changeLayer(baseLayersMiniMap[e.name]);
+    })
+
     // Read markers data from data.csv
     $.get('./data.csv', function (csvString) {
         // Use PapaParse to convert string to array of objects

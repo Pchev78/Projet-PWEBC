@@ -73,8 +73,6 @@ $(document).ready(function () {
         div.innerHTML = rows.join("");
         return div;
     };
-
-    // we are adding a legend to the map
     legend.addTo(map);
 
     function colorMarker(color) {

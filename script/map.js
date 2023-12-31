@@ -122,6 +122,13 @@ $(document).ready(function () {
         map.setView(e.target.getLatLng(), 18);
     }
 
+    // 27 - Fullscreen
+    document.addEventListener('keydown', function(event) {
+        if (event.key.toLowerCase() === "f") {
+            map.toggleFullscreen();
+        }
+    });
+
     // 33 - Localisation
     map
         .locate({
@@ -130,8 +137,7 @@ $(document).ready(function () {
             enableHighAccuracy: true,
         })
         .on("locationfound", (e) => {
-            let latUser = e.latitude, lgnUser = e.longitude; // @TODO A utiliser pour la suite
-            let userLoc = new L.LatLng(latUser, lgnUser);
+            let userLoc = new L.LatLng(e.latitude, e.longitude);
             if (bounds.contains(userLoc))
                 map.setView(userLoc);
             else
@@ -146,11 +152,9 @@ $(document).ready(function () {
     //     .addTo(map);
 
         /*@TODO A implementer depuis ce site https://tomickigrzegorz.github.io/leaflet-examples/# :
-        * 8/45 - Control different groups of markers / Multi layer search
         * 21 - Geocoding adresses search engine outside the map
         * 27 - Fullscreen
-        * 31 - Awesome markers plugin - en fonction du groupe défini en 8
-        * 33/49 - Location / Location button
+        * 45 - Multi layer search
         * 50 - Autocomplete on map - button
         * 54 - Contextmenu
         * 64 - Autocomplete with geojson

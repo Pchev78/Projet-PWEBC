@@ -153,11 +153,9 @@ $(document).ready(function () {
 
         /*@TODO A implementer depuis ce site https://tomickigrzegorz.github.io/leaflet-examples/# :
         * 21 - Geocoding adresses search engine outside the map
-        * 27 - Fullscreen
         * 45 - Multi layer search
         * 50 - Autocomplete on map - button
         * 54 - Contextmenu
         * 64 - Autocomplete with geojson
-        * 69 - Simple animation of jumping marker
-     */
+        */
 });

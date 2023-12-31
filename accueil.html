@@ -22,35 +22,44 @@
     <script src="https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js"></script>
 
     <script src="script/map.js" type="module"></script>
+    <script src="script/cookie.js" type="module"></script>
+    <script src="script/adBlocker.js" type="module"></script>
     <link rel="stylesheet" href="./style/navbar.css">
+    <link rel="stylesheet" href="./style/cookie.css">
     <link rel="stylesheet" href="./style/accueil.css">
 
 </head>
 <body>
-<header>
-    <nav class="navbar">
-        <div class="logo">
-            <img src="img/logo.png" alt="Logo">
-        </div>
-        <div class="nav-links">
-            <div class="menu">
-                <a href="#">🏠 ?</a>
-                <a href="#">📰 ?</a>
-                <a href="#">🧐 ?</a>
-                <a href="#">🌍 ?</a>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="img/logo.png" alt="Logo">
             </div>
-            <div class="auth-links">
-                <a href="#">Pas encore de compte ?</a>
-                <a href="#">Mot de passe oublié?</a>
+            <div class="nav-links">
+                <div class="menu">
+                    <a href="#">🏠 ?</a>
+                    <a href="#">📰 ?</a>
+                    <a href="#">🧐 ?</a>
+                    <a href="#">🌍 ?</a>
+                </div>
+                <div class="auth-links">
+                    <a href="#">Pas encore de compte ?</a>
+                    <a href="#">Mot de passe oublié?</a>
+                </div>
             </div>
+        </nav>
+    </header>
+    <h1>ACCUEIL e-CONTACT</h1>
+    <div id="map"></div>
+        <!-- @TODO Éventuellement ajouter un filtre anti AdBlocker-->
+    <div id="cookie-banner">
+        <p>Ce site utilise des cookies pour améliorer votre expérience. En poursuivant votre navigation, vous acceptez l'utilisation de cookies conformément à notre politique de confidentialité.</p>
+        <div id="cookie-buttons">
+            <button id="accept-cookies">Accepter</button>
+            <button id="refuse-cookies">Refuser</button>
         </div>
-    </nav>
-</header>
-<h1>ACCUEIL e-CONTACT</h1>
-<h3> 	Bienvenue
-    <?php printf ($email);?>
-</h3>
-<div id="map"></div>
+    </div>
+
 </body>
 
 </html>

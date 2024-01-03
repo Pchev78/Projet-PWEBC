@@ -26,6 +26,10 @@ body {
     background-color: #f1f1f1;
 }
 
+#nomCompte {
+    color: #F1F0F0;
+}
+
 .marker-position {
     position: absolute;
     bottom: 0;

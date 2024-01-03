@@ -7,12 +7,12 @@ $mdp =  isset($_POST['mdp'])?($_POST['mdp']):'';
 $msg = '';
 
 if  (count($_POST)==0)
-    require ("identification.html") ;
+    require("connexion.html");
 else {
 
     if  (!connexion($email,$mdp)) {
         $msg ="Erreur dans l'adresse mail ou dans le mot de passe.";
-        require ("identification.html") ;
+        require("connexion.html");
     }
     else {
         $_SESSION['email'] = $email;

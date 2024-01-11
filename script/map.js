@@ -104,7 +104,27 @@ $(document).ready(function () {
             let marker = L.marker([row.longitude, row.latitude], {
                 opacity: 1,
                 icon: colorMarker(color[colorCapacity])
-            }).bindPopup(row.name);
+            })
+                .bindPopup(row.name)
+                .on('click', function(e) {
+                    let nom_station = row.name + e.latlng;
+
+                    $.ajax({
+                        type: "POST",
+                        url: 'http://localhost/Projet%20PWEBC/Projet-PWEBC/velib.php',
+                        // dataType : 'json',
+                        data: {
+                            "stationcode" : row.stationcode
+                        },
+                        success: function (data) {
+                            const velibInfo = JSON.parse(data);
+                            let popupContenu = row.name;
+                            popupContenu+= ' <br/>Vélos électriques : ' + velibInfo.nb_available_ebikes;
+                            popupContenu+= ' <br/>Vélos mécaniques : ' + velibInfo.nb_available_mechanical_bikes;
+                            e.target._popup.setContent(popupContenu);
+                        },
+                    });
+                });
             markers.addLayer(marker);
         }
         map.addLayer(markers);
@@ -124,7 +144,8 @@ $(document).ready(function () {
 
     // 27 - Fullscreen
     document.addEventListener('keydown', function(event) {
-        if (event.key.toLowerCase() === "f") {
+        if (event.key.toLowerCase() === "f" && document.activeElement.tagName !== 'INPUT' &&
+        document.activeElement.tagName !== 'TEXTAREA') {
             map.toggleFullscreen();
         }
     });

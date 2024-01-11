@@ -151,9 +151,8 @@ echo "<script>var email = " . json_encode($email) . ";</script>";
     <h2>0176491234</h2><br>
     <p id="service-description"> Service available from Monday to Friday, 8 am to 10 pm, Saturday from 9 am to 10 pm, and Sunday and public holidays from 9 am to 7 pm.<br> Local call charges apply</p><br>
     <h2> Contact us</h2>
-    <form>
-        <input name="name" type="text" class="feedback-input" placeholder="Your name" />
-        <textarea name="text" class="feedback-input" placeholder="Feedback"></textarea>
+    <form action="form.php" method="post">
+        <textarea name="text" id="feedback" class="feedback-input" placeholder="Feedback"></textarea>
         <input type="submit" value="SOUMETTRE"/>
     </form>
 </section>

@@ -10,7 +10,7 @@ $headerLinks = [
     'Leaflet-MiniMap-master\src\Control.MiniMap.css' => 'stylesheet',
     'https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' => 'stylesheet',
     './style/responsive.css' => 'stylesheet',
-    './style/accueil2.css' => 'stylesheet',
+    './style/accueil.css' => 'stylesheet',
 ];
 $headerScripts = [
     'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js',

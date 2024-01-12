@@ -61,19 +61,6 @@ $(document).ready(function () {
     const label = ["11-20", "21-30", "31-40", "41-50", "51-60", "61 et plus"];
 
     // we add records to the L.control method
-    const rows = [];
-    legend.onAdd = function () {
-        color.map((item, index) => {
-            rows.push(`
-                <div class="row">
-                  <i style="background: ${item}"></i>${label[index]}
-                </div>  
-            `);
-        });
-        div.innerHTML = rows.join("");
-        return div;
-    };
-    legend.addTo(map);
 
     function colorMarker(color) {
         const svgTemplate = `

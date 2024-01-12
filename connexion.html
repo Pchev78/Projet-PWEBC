@@ -3,29 +3,38 @@
 
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="./style/identification.css">
+    <link rel="stylesheet" href="style/connexion.css">
     <title>Se connecter à votre compte</title>
 </head>
 
 <body>
-    <div class="container">
-        <h3> Formulaire d'authentification </h3>
+<div class="main-w3layouts wrapper">
+    <h1>Bienvenue sur notre site</h1>
+    <div class="main-agileinfo">
+        <div class="agileits-top">
+            <form action="connexion.php" method="post">
+                <input class="text email" type="email" name="email" placeholder="Identifiant" required="">
+                <input class="text" type="password" name="password" placeholder="Mot de Passe" required="">
 
-        <form action="connexion.php" method="post">
-            Identifiant <br />
-            <input name="email" type="text" placeholder="adresse@mail.com" value="<?php echo $email; ?>">
-            <br />
-            Mot de passe <br />
-            <input name="mdp" type="password" value="<?php echo $mdp; ?>">
-            <br />
-            <input type="submit" value="Soumettre">
-            <div>
-                Vous n'avez pas encore de compte ? <a href="creerCompte.php">Créez-en un !</a>
-            </div>
-        </form>
-
-        <div id="m"> <?php echo $msg; ?> </div>
+                <input type="submit" value="Connectez-vous">
+            </form>
+            <p>Vous n'avez pas encore de compte ? <a href="creerCompte.php">Créez-en un !</a></p>
+        </div>
     </div>
+    <ul class="colorlib-bubbles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+<!-- //main -->
 </body>
 
 </html>

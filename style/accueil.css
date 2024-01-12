@@ -1,59 +1,587 @@
-*,
-:after,
-:before {
-    box-sizing: border-box;
-    padding: 0;
+* {
     margin: 0;
-}
-
-html {
-    height: 100%;
-}
-
-#map {
-    width: 60%;
-    height: 60%;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
 body {
-    position: relative;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
-    sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-    height: 100%;
-    min-height: 100%;
-    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin: 0;
-    background-color: #f1f1f1;
 }
 
-#nomCompte {
-    color: #F1F0F0;
+#home {
+    background-size: cover;
+    background: url('../img/background.jpg') no-repeat center;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.marker-position {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    z-index: 999;
-    padding: 10px;
-    font-weight: 700;
+section {
+    width: 100%;
+    height: 50vh;
+    padding: 40px 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.section:nth-child(even) {
+    background-color: #f8f8f8;
+}
+
+.section:nth-child(odd) {
     background-color: #fff;
 }
 
-.legend {
-    background: #f1f3dd;
-    padding: 8px;
-    border-radius: 5px;
+.content {
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-.legend .row {
+.text h1 {
+    font-size: 9em;
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+    -webkit-text-stroke: 1px #fff;
+    color: transparent;
+    background: url('../img/back-text.png');
+    -webkit-background-clip: text;
+    background-position: 0 0;
+    animation: backText 20s linear infinite alternate;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px 100px;
     display: flex;
-    line-height: 30px;
+    justify-content: center;
+    align-items: center;
 }
 
-.legend i {
+.navigation a {
+    position: relative;
+    color: #fff;
+    font-size: 1.1em;
+    margin: 0 7px;
+    text-decoration: none;
+    padding: 6px 20px;
+}
+
+.navigation a span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid #fff;
+    border-radius: 7px;
+    transform: scale(0);
+    opacity: 0;
+    transition: .5s;
+}
+
+.navigation a:hover span {
+    transform: scale(1);
+    opacity: 1;
+}
+
+
+@keyframes backText {
+    100% {
+        background-position: 2000px 0;
+    }
+}
+
+.navigation.scrolled {
+    background-color: #333;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.navigation.scrolled a {
+    color: #fff;
+}
+
+.navigation.scrolled a:hover span {
+    border-color: #fff;
+}
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px 0;
+    background-color: #4285f4;
+    color: #ffffff;
+    width: 100%;
+}
+/* ... Autres styles existants ... */
+
+/* Style de la barre de navigation lors du défilement */
+.navigation.scrolled {
+    background-color: #333;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.navigation a {
+    transition: color 0.3s ease-in-out;
+}
+
+.navigation a:hover {
+    color: #fff;
+}
+
+.navigation a span {
+    border-color: transparent;
+}
+
+/* Animation de la barre de navigation */
+.navigation {
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.navigation a {
+    transition: color 0.3s ease-in-out;
+}
+
+.navigation a:hover span {
+    border-color: #fff;
+    transform: scale(1.2);
+}
+/* ... Autres styles existants ... */
+
+/* Ajout d'une ombre sur le texte du logo au survol */
+.text h1:hover {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+/* Ajout de styles au lien actif dans la barre de navigation */
+.navigation a.active {
+    border-bottom: 2px solid white;
+}
+
+/* ... Autres styles ... */
+
+.navigation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(51, 51, 51, 0); /* Couleur de fond initiale avec transparence */
+    transition: background-color 0.5s ease-in-out; /* Ajout de la transition */
+}
+
+.navigation.scrolled {
+    background-color: rgba(51, 51, 51, 0.9); /* Nouvelle couleur de fond avec transparence */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+}
+
+.navigation a {
+    transition: color 0.3s ease-in-out;
+}
+
+.navigation a:hover {
+    color: #fff;
+}
+.content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: justify;
+}
+
+.title, .subtitle {
+    font-family: 'YourChosenFont', sans-serif;
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.left-content, .right-content {
+    flex: 1;
+}
+
+.left-content p {
+    margin-bottom: 20px;
+    white-space: pre-line;
+}
+
+@media only screen and (max-width: 768px) {
+    .left-content, .right-content {
+        flex: 100%;
+        margin-right: 0;
+    }
+}
+.content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.title {
+    font-family: 'YourChosenFont', sans-serif; /* Remplacez 'YourChosenFont' par le nom de la police souhaitée */
+    font-size: 2em; /* Ajustez la taille du titre selon vos préférences */
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.left-content,
+.right-content {
+    flex: 1;
+}
+
+@media only screen and (max-width: 768px) {
+    .left-content,
+    .right-content {
+        flex: 100%;
+    }
+}
+
+.subtitle {
+    font-family: 'Arial', sans-serif; /* Remplacez 'YourChosenFont' par le nom de la police souhaitée */
+    font-size: 1.5em; /* Ajustez la taille du sous-titre selon vos préférences */
+}
+
+ul {
+    list-style-type: disc; /* Utilisez 'disc' pour des puces rondes, ou 'square' pour des carrés, selon vos préférences */
+    margin-left: 2px; /* Ajustez la marge à gauche selon vos préférences */
+}
+.content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: justify; /* Justifie le texte pour une meilleure présentation */
+}
+
+.title {
+    font-family: 'YourChosenFont', sans-serif;
+    font-size: 2.5em; /* Augmente la taille du titre */
+    margin-bottom: 20px; /* Ajoute une marge en bas pour séparer le titre du contenu */
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.left-content,
+.right-content {
+    flex: 1;
+}
+
+.left-content p {
+    margin-bottom: 20px; /* Ajoute une marge en bas pour séparer les paragraphes */
+}
+
+@media only screen and (max-width: 768px) {
+    .left-content,
+    .right-content {
+        flex: 100%;
+    }
+}
+
+.subtitle {
+    font-family: 'YourChosenFont', sans-serif;
+    font-size: 1.8em; /* Ajuste la taille du sous-titre */
+    margin-bottom: 10px; /* Ajoute une marge en bas pour séparer le sous-titre de la liste */
+}
+
+ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+ul li {
+    margin-bottom: 10px; /* Ajoute une marge en bas pour séparer les éléments de la liste */
+}
+.left-content {
+    flex: 1;
+    margin-bottom: 20px; /* Ajoute une marge basse entre les deux paragraphes */
+}
+
+.right-content {
+    flex: 1;
+}
+
+.left-content p {
+    margin-bottom: 20px;
+    white-space: pre-line;
+}
+
+@media only screen and (max-width: 768px) {
+    .left-content,
+    .right-content {
+        flex: 100%;
+    }
+}
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.left-content {
+    flex: 1;
+    margin-right: 200px; /* Ajoute une marge à droite pour séparer les deux parties */
+}
+
+.right-content {
+    flex: 1;
+}
+
+.left-content p {
+    margin-bottom: 20px;
+    white-space: pre-line;
+}
+
+@media only screen and (max-width: 768px) {
+    .left-content,
+    .right-content {
+        flex: 100%;
+        margin-right: 0; /* Ajuste la marge à droite sur les écrans plus petits */
+    }
+}
+.right-content {
+    flex: 1;
+    line-height: 1.6; /* Ajuste l'espacement entre les lignes dans la partie droite */
+}
+
+.right-content ul {
+    margin-top: 10px; /* Ajoute un peu d'espace au-dessus de la liste */
+}
+
+.right-content li {
+    margin-bottom: 8px; /* Ajoute un peu d'espace entre les éléments de la liste */
+}
+/* Ajoutez ou modifiez le style au besoin */
+
+
+.ag-format-container {
+    width: 1142px;
+    margin: 0 auto;
+}
+
+.ag-courses_box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 50px 0;
+}
+
+  
+  .ag-courses_item {
+    box-sizing: border-box;
+    flex-basis: calc(33.33333% - 30px);
+    margin: 0 15px 30px;
+    overflow: hidden;
+    border-radius: 28px;
+  }
+  
+  .ag-courses-item_link {
     display: block;
-    width: 30px;
-    height: 30px;
-    margin-right: 5px;
+    padding: 30px 20px;
+    background-color: #121212;
+    overflow: hidden;
+    position: relative;
+  }
+  .ag-courses-item_link:hover,
+  .ag-courses-item_link:hover .ag-courses-item_date {
+    text-decoration: none;
+    color: #FFF;
+  }
+  .ag-courses-item_link:hover .ag-courses-item_bg {
+    -webkit-transform: scale(10);
+    -ms-transform: scale(10);
+    transform: scale(10);
+  }
+  .ag-courses-item_title {
+    min-height: 87px;
+    margin: 0 0 25px;
+  
+    overflow: hidden;
+  
+    font-weight: bold;
+    font-size: 30px;
+    color: #FFF;
+  
+    z-index: 2;
+    position: relative;
+    text-decoration: none;
+  }
+  .ag-courses-item_date-box {
+    font-size: 18px;
+    color: #FFF;
+  
+    z-index: 2;
+    position: relative;
+  }
+  .ag-courses-item_date {
+    font-weight: bold;
+    color: #f9b234;
+  
+    -webkit-transition: color .5s ease;
+    -o-transition: color .5s ease;
+    transition: color .5s ease
+  }
+  .ag-courses-item_bg {
+    height: 128px;
+    width: 128px;
+    background-color: #f9b234;
+  
+    z-index: 1;
+    position: absolute;
+    top: -75px;
+    right: -75px;
+  
+    border-radius: 50%;
+  
+    -webkit-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+  }
+  .ag-courses_item:nth-child(2n) .ag-courses-item_bg {
+    background-color: #3ecd5e;
+  }
+  .ag-courses_item:nth-child(3n) .ag-courses-item_bg {
+    background-color: #e44002;
+  }
+  .ag-courses_item:nth-child(4n) .ag-courses-item_bg {
+    background-color: #952aff;
+  }
+  .ag-courses_item:nth-child(5n) .ag-courses-item_bg {
+    background-color: #cd3e94;
+  }
+  .ag-courses_item:nth-child(6n) .ag-courses-item_bg {
+    background-color: #4c49ea;
+  }
+  
+  
+  
+  @media only screen and (max-width: 979px) {
+    .ag-courses_item {
+      flex-basis: calc(50% - 30px);
+    }
+    .ag-courses-item_title {
+      font-size: 24px;
+    }
+  }
+  
+  @media only screen and (max-width: 767px) {
+    .ag-format-container {
+      width: 96%;
+    }
+  }
+  
+  @media only screen and (min-width: 640px) {
+    .ag-courses_item {
+      flex-basis: calc(50% - 30px);
+    }
+  }
+  
+    .ag-courses-item_title {
+      min-height: 72px;
+      line-height: 1;
+      font-size: 24px;
+    }
+    .ag-courses-item_link {
+      padding: 22px 40px;
+    }
+    .ag-courses-item_date-box {
+      font-size: 16px;
+    }
+  
+  #rent {
+    height: 200%; 
+  }
+  #services{
+    background-color: #333;
+  }
+  
+form { max-width:420px; margin:50px auto; }
+
+.feedback-input {
+  color:white;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight:500;
+  font-size: 18px;
+  border-radius: 5px;
+  line-height: 22px;
+  background-color: transparent;
+  border:2px solid #CC6666;
+  transition: all 0.3s;
+  padding: 13px;
+  margin-bottom: 15px;
+  width:100%;
+  box-sizing: border-box;
+  outline:0;
+}
+
+.feedback-input:focus { border:2px solid #CC4949; }
+
+textarea {
+  height: 150px;
+  line-height: 150%;
+  resize:vertical;
+}
+
+[type="submit"] {
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+  width: 100%;
+  background:#CC6666;
+  border-radius:5px;
+  border:0;
+  cursor:pointer;
+  color:white;
+  font-size:24px;
+  padding-top:10px;
+  padding-bottom:10px;
+  transition: all 0.3s;
+  margin-top:-4px;
+  font-weight:700;
+}
+[type="submit"]:hover { background:#CC4949; }
+#services {
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px;
+}
+
+#services {
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    flex-direction: column; /* Changement vers une direction verticale */
+    align-items: center;
+    padding: 40px;
+    height: 80vh;
+    margin-bottom: 100px;
+}
+
+#services h1,
+#service-description {
+    margin-bottom: 20px; /* Ajout de la marge entre le titre et le paragraphe */
+}
+
+form {
+    width: 100%;
 }

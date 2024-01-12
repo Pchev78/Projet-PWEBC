@@ -1,21 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Créer un compte</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./style/inscription.css">
+    <title>Créer un compte</title>
 </head>
 <body>
-<h3>Créez un compte</h3>
 <form action="creerCompte.php"  method="post">
-    Identifiant <br/>
-    <input 	name="email" type="text" placeholder="adresse@mail.com" value="<?php echo $email;?>">
-    <br/>
-    Mot de passe <br/>
-    <input  name="mdp" type="text" value= "<?php echo $mdp;?>">
-    <br/>
-    <input type= "submit" value="soumettre">
+    <div class="login-wrap">
+        <div class="login-html">
+            <div class="login-form">
+                <div class="sign-up-htm">
+                    <div class="group">
+                        <label for="user" class="label">Identifiant</label>
+                        <input class="text email" type="email" name="email" placeholder="Identifiant" required="">
+                    </div>
+                    <div class="group">
+                        <label for="pass" class="label">Mot de Passe</label>
+                        <input class="text" type="password" name="password" placeholder="Mot de Passe" required="">
+
+                    </div>
+                    <div class="group">
+                        <label for="pass" class="label">Confirmer le Mot de Passe</label>
+                        <input class="text" type="password" name="password" placeholder="Mot de Passe" required="">
+                    </div>
+                    <div class="group">
+                        <input type="submit" class="button" value="Inscrivez-vous">
+                    </div>
+                    <div class="hr"></div>
+                    <div class="foot-lnk">
+                        <label for="tab-1">Vous avez déjà un compte ? <a href="connexion.php">Connectez-vous!</a></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </form>
 
-<div id ="msg"> <?php echo $msg;?> </div>
+
+
 </body>
 </html>

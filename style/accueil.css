@@ -585,3 +585,22 @@ textarea {
 form {
     width: 100%;
 }
+
+
+#map .legend {
+    background: #f1f3dd;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+#map .legend .row {
+    display: flex;
+    line-height: 30px;
+}
+
+#map .legend i {
+    display: block;
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+}

@@ -45,6 +45,13 @@ $(document).ready(function () {
     miniMapContainer.style.height = "120px";
     miniMapContainer.style.width = "120px";
 
+    // 42 - Echelle
+    L.control
+        .scale({
+            imperial: false,
+        })
+        .addTo(map);
+
     // 13 - Différenciation des marqueurs
     // LEGENDS
 
@@ -164,19 +171,4 @@ $(document).ready(function () {
             else
                 map.setView([lat, lng], zoom);
         });
-
-    // 42 - Echelle
-    // L.control
-    //     .scale({
-    //         imperial: false,
-    //     })
-    //     .addTo(map);
-
-        /*@TODO A implementer depuis ce site https://tomickigrzegorz.github.io/leaflet-examples/# :
-        * 21 - Geocoding adresses search engine outside the map
-        * 45 - Multi layer search
-        * 50 - Autocomplete on map - button
-        * 54 - Contextmenu
-        * 64 - Autocomplete with geojson
-        */
 });

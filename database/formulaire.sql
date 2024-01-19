@@ -36,7 +36,7 @@ CREATE TABLE `formulaire` (
 --
 
 INSERT INTO `formulaire` (`Mail`, `Commentaire`) VALUES
-('test@yahoo.com', 'beau site'),
+('test@yahoo.com', 'great site'),
 ('test@yahoo.com', 'feahufeaio');
 
 --

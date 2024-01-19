@@ -6,15 +6,15 @@ $mdp =  isset($_POST['mdp'])?($_POST['mdp']):'';
 $msg = '';
 
 if (count($_POST) == 0)
-    require("creerCompte.html");
+    require("register.html");
 else {
     if  (!createAccount($email,$mdp)) {
         $msg ="Impossible de créer le compte. Vérifiez que vous n'ayez pas déjà un compte associé à cette adresse mail.";
-        require ("creerCompte.html");
+        require("register.html");
     }
     else {
         $_SESSION['email'] = $email;
-        $url = "accueil.php";
+        $url = "home.php";
         header("Location:" . $url) ;
     }
 }

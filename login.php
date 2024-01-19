@@ -7,22 +7,22 @@ $mdp =  isset($_POST['mdp'])?($_POST['mdp']):'';
 $msg = '';
 
 if  (count($_POST)==0)
-    require("connexion.html");
+    require("login.html");
 else {
 
-    if  (!connexion($email,$mdp)) {
+    if  (!login($email,$mdp)) {
         $msg ="Erreur dans l'adresse mail ou dans le mot de passe.";
-        require("connexion.html");
+        require("login.html");
     }
     else {
         $_SESSION['email'] = $email;
-        $url = "accueil.php";
+        $url = "home.php";
         header("Location:" . $url) ;
     }
 
 }
 
-function connexion($email,$mdp) {
+function login($email,$mdp) {
     require('connectSQL.php'); //$pdo est défini dans ce fichier
     $sql="SELECT * FROM `utilisateur` WHERE email=:email AND mdp=:mdp";
     try {

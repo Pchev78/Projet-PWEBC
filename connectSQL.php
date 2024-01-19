@@ -12,10 +12,10 @@ try {
 
     // On active le mode d'affichage des erreurs, et le lancement d'exception en cas d'erreur
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Connexion au DSN : ".$dsn." OK ! </br>";
+    echo "Connection to DSN : ".$dsn." OK ! </br>";
 }
 catch (PDOException $e) {
-    echo "Echec de connexion : " . $e->getMessage() . "\n";
+    echo "Connection failed : " . $e->getMessage() . "\n";
     die(); // On arrête tout.
 }
 ?>

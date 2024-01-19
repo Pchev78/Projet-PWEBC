@@ -10,7 +10,7 @@ $headerLinks = [
     'Leaflet-MiniMap-master\src\Control.MiniMap.css' => 'stylesheet',
     'https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' => 'stylesheet',
     './style/responsive.css' => 'stylesheet',
-    './style/accueil.css' => 'stylesheet',
+    './style/home.css' => 'stylesheet',
 ];
 $headerScripts = [
     'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js',
@@ -44,7 +44,7 @@ echo "<script>var email = " . json_encode($email) . ";</script>";
         <a href="#rent" class="link">Rent</a>
         <a href="#services" class="link">Contact</a>
         <a href="#map" class="link">Location</a>
-        <a href="./connexion.php" id="connexion">Log in</a>
+        <a href="login.php" id="login">Log in</a>
     </nav>
 </header>
 
@@ -153,7 +153,7 @@ echo "<script>var email = " . json_encode($email) . ";</script>";
     <h2> Contact us</h2>
     <form action="form.php" method="post">
         <textarea name="text" id="feedback" class="feedback-input" placeholder="Feedback"></textarea>
-        <input type="submit" value="SOUMETTRE"/>
+        <input type="submit" value="SUBMIT"/>
     </form>
 </section>
 

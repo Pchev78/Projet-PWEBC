@@ -8,7 +8,7 @@ if  (!postFeedback($email,$feedback)) {
 }
 else {
     $_SESSION['email'] = $email;
-    $url = "accueil.php";
+    $url = "home.php";
     header("Location:" . $url) ;
 }
 
